@@ -1,0 +1,28 @@
+{
+  "name": "rolley-djs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "rolley.js",
+  "scripts": {
+    "build": "babel src -d lib"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-env": "^1.6.0"
+  },
+  "dependencies": {
+    "discord.js": "^11.1.0",
+    "express": "^4.15.4",
+    "fs": "0.0.1-security",
+    "pg": "^7.1.2",
+    "pg-format": "^1.0.4",
+    "superagent": "^3.5.2",
+    "winston": "^2.3.1",
+    "grunt": "^1.0.1",
+    "grunt-contrib-cssmin": "^2.2.0",
+    "grunt-contrib-sass": "^1.0.0",
+    "grunt-contrib-watch": "^1.0.0"
+  }
+}
