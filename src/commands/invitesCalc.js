@@ -7,6 +7,7 @@ const invitesCalc = (bot, msg, cmd) => {
   const richEmbed = new Discord.RichEmbed();
   let user = msg.author.id;
   let numberUses;
+  let max = 0;
   let invites = msg.guild.fetchInvites()
     .then(result => {
       let inviteArr = result.array();
@@ -14,26 +15,29 @@ const invitesCalc = (bot, msg, cmd) => {
         let invite = inviteArr[i];
         if (invite.inviter.id === user) {
           numberUses = invite.uses;
-          break;
+
+          if (numberUses > max) {
+            max = numberUses;
+          }
         }
       }
+    numberUses = max;
+    let nextRole;
+    let roleNumber;
+    if (numberUses < 4) [nextRole, roleNumber] = ["Recruit", 4];
+    else if (numberUses < 12) [nextRole, roleNumber] = ["Corporal", 12];
+    else if (numberUses < 36) [nextRole, roleNumber] = ["Sergeant", 36];
+    else if (numberUses < 75) [nextRole, roleNumber] = ["Lieutenant", 75];
+    else if (numberUses < 125) [nextRole, roleNumber] = ["Captain", 125];
+    else if (numberUses < 175) [nextRole, roleNumber] = ["General", 175];
+    else if (numberUses >= 175) [nextRole, roleNumber] = ["XXX", 0];
+    let numberLeft = roleNumber - numberUses;
+    let hasInviteLink = true;
+    if (isNaN(numberLeft)) hasInviteLink = false;
 
-      let nextRole;
-      let roleNumber;
-      if (numberUses < 4) [nextRole, roleNumber] = ["Recruit", 4];
-      else if (numberUses < 12) [nextRole, roleNumber] = ["Corporal", 12];
-      else if (numberUses < 36) [nextRole, roleNumber] = ["Sergeant", 36];
-      else if (numberUses < 75) [nextRole, roleNumber] = ["Lieutenant", 75];
-      else if (numberUses < 125) [nextRole, roleNumber] = ["Captain", 125];
-      else if (numberUses < 175) [nextRole, roleNumber] = ["General", 175];
-      else if (numberUses >= 175) [nextRole, roleNumber] = ["XXX", 0];
-      let numberLeft = roleNumber - numberUses;
-      let hasInviteLink = true;
-      if (isNaN(numberLeft)) hasInviteLink = false;
-
-      if (cmd === 'invites') inviteMsg(msg, numberUses, numberLeft, nextRole, hasInviteLink);
-      else if (cmd === 'updateme') updateMsg(msg, numberUses, numberLeft, nextRole, hasInviteLink);
-    });
+    if (cmd === 'invites') inviteMsg(msg, numberUses, numberLeft, nextRole, hasInviteLink);
+    else if (cmd === 'updateme') updateMsg(msg, numberUses, numberLeft, nextRole, hasInviteLink);
+  });
 }
 
 export default invitesCalc;

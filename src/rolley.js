@@ -18,7 +18,7 @@ logger.add(logger.transports.Console, {
 });
 logger.level = 'debug';
 
-const TOKEN = auth.tester_token;
+const TOKEN = auth.token;
 // const DBOT_TOKEN = auth.dbot_token;
 // const PWBOT_TOKEN = auth.pwbot_token;
 
