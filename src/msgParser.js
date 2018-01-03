@@ -4,7 +4,7 @@ const msgParser = (bot) => {
 
   bot.on('message', (msg) => {
     const string = msg.content;
-    const cmds = ['help', 'invites', 'top', 'membercount'];
+    const cmds = ['help', 'invites', 'top', 'membercount', 'set'];
 
     if (msg.toString().substring(0, 1) === '>') { // if prefix is used
       const args = msg.toString().substring(1).split(' ');

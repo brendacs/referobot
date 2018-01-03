@@ -5,7 +5,7 @@ A referral bot, great for investment pump Discord servers and other referral-bas
 ## Commands
 
 * Admin = "Administrator" permission
-* Mod = "Manage Messages" permission
+* Mod = "Manage Roles" permission
 
 |Command|Description|Permissions|
 |---|---|--|
@@ -13,6 +13,8 @@ A referral bot, great for investment pump Discord servers and other referral-bas
 |`invites`|displays number of invites and number left until next role|everyone|
 |`top <#>`|displays top <#> of inviters|everyone|
 |`membercount`|displays total number of server members|everyone|
+|`set <channel-name>`|set a specific channel for a bot to prevent spam|admin|
+|`set default`|allow all channels to use the bot|admin|
 
 Referobot also automatically updates user's roles.
 

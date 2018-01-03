@@ -42,7 +42,7 @@ const updateme = (msg, numberUses, numberLeft, nextRole, hasInviteLink) => {
         }
       }
     }
-  } else {
+  } else if (!hasInviteLink) {
     msg.channel.send({
       embed: richEmbed
               .setColor('#ffffff')

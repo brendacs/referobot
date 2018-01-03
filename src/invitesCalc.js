@@ -30,9 +30,9 @@ const invitesCalc = (bot, msg, cmd) => {
       let roleNumber;
       if (numberUses < roleNums[0]) [nextRole, roleNumber] = [roleNames[0], roleNums[0]];
       else if (numberUses < roleNums[1]) [nextRole, roleNumber] = [roleNames[1], roleNums[1]];
-      else if (numberUses < roleNum[2]) [nextRole, roleNumber] = [roleNames[2], roleNums[2]];
-      else if (numberUses < roleNum[3]) [nextRole, roleNumber] = [roleNames[3], roleNums[3]];
-      else if (numberUses < roleNum[4]) [nextRole, roleNumber] = [roleNames[4], roleNums[4]];
+      else if (numberUses < roleNums[2]) [nextRole, roleNumber] = [roleNames[2], roleNums[2]];
+      else if (numberUses < roleNums[3]) [nextRole, roleNumber] = [roleNames[3], roleNums[3]];
+      else if (numberUses < roleNums[4]) [nextRole, roleNumber] = [roleNames[4], roleNums[4]];
       else if (numberUses < roleNums[5]) [nextRole, roleNumber] = [roleNames[5], roleNums[5]];
       else if (numberUses >= roleNums[5]) {
         msg.channel.send({

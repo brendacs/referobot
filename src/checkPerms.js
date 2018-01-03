@@ -1,15 +1,20 @@
-const checkPerms = (msg) => {
+export const checkAdmin = (msg) => {
   checkNull(msg);
   let admin = msg.member.hasPermission('ADMINISTRATOR');
+  return admin;
+}
+
+export const checkMod = (msg) => {
+  checkNull(msg);
   let mod = msg.member.hasPermission('MANAGE_ROLES');
-  return admin || mod;
+  return mod;
 }
 
 // insert null member into cache
-const checkNull = (msg) => {
+export const checkNull = (msg) => {
   if (msg.member == null) {
     msg.guild.fetchMember(msg.author, true);
   }
 }
 
-export default checkPerms;
+export default checkMod;
