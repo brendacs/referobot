@@ -9,7 +9,7 @@ const commands = (bot, msg, cmd, subcmd) => {
     return;
   } else {
     if (cmd === 'help') help(bot, msg, cmd);
-    else if (cmd === 'invites' || cmd === 'updateme') invitesCalc(bot, msg, cmd);
+    else if (cmd === 'invites') invitesCalc(bot, msg, cmd);
     else if (cmd === 'top' && subcmd) top(bot, msg, cmd, subcmd);
     else if (cmd === 'membercount') membercount(msg);
     else return;

@@ -8,7 +8,8 @@ const invitesCalc = (bot, msg, cmd, thisUser, thisMember) => {
   let user = thisUser ? thisUser : msg.author.id;
   let numberUses;
   let max = 0;
-  let invites = msg !== null ? msg.guild.fetchInvites() : thisMember.guild.fetchInvites()
+  let invites = msg !== null ? msg.guild.fetchInvites() : thisMember.guild.fetchInvites();
+  invites
     .then(result => {
       let inviteArr = result.array();
       for (let i = 0; i < inviteArr.length; i++) {
@@ -21,6 +22,7 @@ const invitesCalc = (bot, msg, cmd, thisUser, thisMember) => {
           }
         }
       }
+
     numberUses = max;
     let nextRole;
     let roleNumber;
@@ -36,7 +38,6 @@ const invitesCalc = (bot, msg, cmd, thisUser, thisMember) => {
     if (isNaN(numberLeft)) hasInviteLink = false;
 
     if (cmd === 'invites') invitesCmd(msg, numberUses, numberLeft, nextRole, hasInviteLink);
-    else { updateme(msg, numberUses, numberLeft, nextRole, hasInviteLink, thisMember) };
   });
 }
 

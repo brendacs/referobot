@@ -4,9 +4,9 @@ const msgParser = (bot) => {
 
   bot.on('message', (msg) => {
     const string = msg.content;
-    const cmds = ['help', 'invites', 'updateme', 'top'];
+    const cmds = ['help', 'invites', 'top', 'membercount'];
 
-    if (msg.toString().substring(0, 1) === '>') { // if prefix is used
+    if (msg.toString().substring(0, 1) === '~') { // if prefix is used
       const args = msg.toString().substring(1).split(' ');
       const cmd = args[0];
       const subcmd = args[1];
