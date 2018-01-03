@@ -1,6 +1,6 @@
 import Discord from 'discord.js';
 
-const inviteMsg = (msg, numberUses, numberLeft, nextRole, hasInviteLink) => {
+const invites = (msg, numberUses, numberLeft, nextRole, hasInviteLink) => {
   const richEmbed = new Discord.RichEmbed();
 
   if (hasInviteLink) {
@@ -18,4 +18,4 @@ const inviteMsg = (msg, numberUses, numberLeft, nextRole, hasInviteLink) => {
   }
 }
 
-export default inviteMsg;
+export default invites;

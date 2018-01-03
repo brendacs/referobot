@@ -1,9 +1,8 @@
 import Discord from 'discord.js';
 
-const updateMsg = (msg, numberUses, numberLeft, nextRole, hasInviteLink) => {
+const updateme = (msg, numberUses, numberLeft, nextRole, hasInviteLink, thisMember) => {
   const richEmbed = new Discord.RichEmbed();
-  let user = msg.author.id;
-  let member = msg.member;
+  let member = thisMember ? thisMember : msg.member;
 
   if (member == null) {
     msg.guild.fetchMember(msg.author, true);
@@ -11,7 +10,7 @@ const updateMsg = (msg, numberUses, numberLeft, nextRole, hasInviteLink) => {
   }
 
   if (hasInviteLink) {
-    let allGuildRoles = msg.guild.roles.array();
+    let allGuildRoles = msg !== null ? msg.guild.roles.array() : thisMember.guild.roles.array();
     let roles = member.roles.array();
     let updatedRole;
     let currentRoles = {};
@@ -36,7 +35,7 @@ const updateMsg = (msg, numberUses, numberLeft, nextRole, hasInviteLink) => {
       updatedRole = "General";
     }
 
-    if (updatedRole in currentRoles || numberUses < 4) {
+    if ((updatedRole in currentRoles || numberUses < 4)) {
       updated = true;
     } else {
       for(let i = 0; i < allGuildRoles.length; i++) {
@@ -46,13 +45,14 @@ const updateMsg = (msg, numberUses, numberLeft, nextRole, hasInviteLink) => {
         }
       }
     }
-
-    msg.channel.send({
-      embed: richEmbed
-              .setColor('#ffffff')
-              .setDescription(`Your roles have been updated.`)
-    });
-  } else {
+    if (msg !== null) {
+      msg.channel.send({
+        embed: richEmbed
+                .setColor('#ffffff')
+                .setDescription(`Your roles have been updated.`)
+      });
+    }
+  } else if (msg !== null) {
     msg.channel.send({
       embed: richEmbed
               .setColor('#ffffff')
@@ -61,4 +61,4 @@ const updateMsg = (msg, numberUses, numberLeft, nextRole, hasInviteLink) => {
   }
 }
 
-export default updateMsg;
+export default updateme;

@@ -4,6 +4,7 @@ import request from 'superagent';
 import auth from '../auth.json';
 import msgParser from './msgParser.js';
 import express from 'express';
+import autoUpdate from './autoUpdate.js';
 
 const app = express();
 
@@ -32,24 +33,11 @@ bot.on('ready', (evt) => {
   logger.info('Logged in as: ');
   logger.info(bot.user.username + ' - ' + bot.user.id);
 
-  // Server count for discord bot lists
-  // request.post(`https://discordbots.org/api/bots/${bot.user.id}/stats`)
-  //   .set('Authorization', DBOT_TOKEN)
-  //   .send({server_count: bot.guilds.size})
-  //   .end(err => {
-  //     if (err) return console.error(err);
-  //     console.log("Success (dbot)!");
-  //   });
-
-  // request.post(`https://bots.discord.pw/api/bots/${bot.user.id}/stats`)
-  //   .set('Authorization', PWBOT_TOKEN)
-  //   .send({server_count: bot.guilds.size})
-  //   .end(err => {
-  //     if (err) return console.error(err);
-  //     console.log("Success (pwbot)!");
-  //   });
-
   bot.user.setPresence({status: 'online', game: {name: `>help | ${bot.guilds.size} servers`, type: 0}});
+});
+
+bot.on('guildMemberAdd', (member) => {
+  autoUpdate(bot, member);
 });
 
 msgParser(bot);

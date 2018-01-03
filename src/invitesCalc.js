@@ -1,14 +1,14 @@
 import Discord from 'discord.js';
-import roles from '../roles.js';
-import inviteMsg from './inviteMsg.js';
-import updateMsg from './updateMsg.js';
+import roles from './roles.js';
+import invitesCmd from './commands/invites.js';
+import updateme from './commands/updateme.js';
 
-const invitesCalc = (bot, msg, cmd) => {
+const invitesCalc = (bot, msg, cmd, thisUser, thisMember) => {
   const richEmbed = new Discord.RichEmbed();
-  let user = msg.author.id;
+  let user = thisUser ? thisUser : msg.author.id;
   let numberUses;
   let max = 0;
-  let invites = msg.guild.fetchInvites()
+  let invites = msg !== null ? msg.guild.fetchInvites() : thisMember.guild.fetchInvites()
     .then(result => {
       let inviteArr = result.array();
       for (let i = 0; i < inviteArr.length; i++) {
@@ -35,8 +35,8 @@ const invitesCalc = (bot, msg, cmd) => {
     let hasInviteLink = true;
     if (isNaN(numberLeft)) hasInviteLink = false;
 
-    if (cmd === 'invites') inviteMsg(msg, numberUses, numberLeft, nextRole, hasInviteLink);
-    else if (cmd === 'updateme') updateMsg(msg, numberUses, numberLeft, nextRole, hasInviteLink);
+    if (cmd === 'invites') invitesCmd(msg, numberUses, numberLeft, nextRole, hasInviteLink);
+    else { updateme(msg, numberUses, numberLeft, nextRole, hasInviteLink, thisMember) };
   });
 }
 
