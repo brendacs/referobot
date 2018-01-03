@@ -32,7 +32,7 @@ Referobot also automatically updates user's roles.
 1. Make sure your Referobot has the `Manage Roles` permission in your server. If for some reason this does not work, move the Referobot's role above all other user roles.
 2. To customize roles and role invite number thresholds, go to the `roles.json` file in the root Referobot directory. Fill in the roles and the invites required for those roles. You can customize up to six roles. Role names are case-sensitive. Make sure the role names you type exactly match the role names from your server.<sup>2</sup>
 
-![Invites Example](https://raw.githubusercontent.com/brendacs/referobot/master/images/ui-example.png)
+![Invites Example](https://raw.githubusercontent.com/brendacs/Referobot/master/images/ui-example.png)
 
 ### Footnotes
 
