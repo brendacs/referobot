@@ -30,9 +30,9 @@ Referobot also automatically updates user's roles.
 
 1. Create a bot user and generate a token [here](https://discordapp.com/developers/applications) and invite this bot to your server using its `Client ID`. The link should look like this: `https://discordapp.com/oauth2/authorize?&client_id=YOUR_CLIENT_ID&scope=bot&permissions=268435464`.
 1. Make sure your Referobot has the `Manage Roles` permission in your server. If for some reason this does not work, move the Referobot's role above all other user roles.
-2. To customize roles and role invite number thresholds, go to the `roles.json` file in the root Referobot directory. You can customize up to six roles. Role names are case-sensitive. Make sure the role names you type exactly match the role names from your server.<sup>2</sup>
+2. To customize roles and role invite number thresholds, go to the `roles.json` file in the root Referobot directory. Fill in the roles and the invites required for those roles. You can customize up to six roles. Role names are case-sensitive. Make sure the role names you type exactly match the role names from your server.<sup>2</sup>
 
 ### Footnotes
 
 1. If you need 24/7 hosting, you may need a VPS.
-2. For now, you have more than six roles, any roles beyond six will not work, but the bot will not break.
+2. For now, you have more than six roles, any roles beyond six will not work. If you have less than six roles, fill in only the last roles and leave the other values at 0. For example, if I had four referral roles, I would customize as follows: `{'RankOne': 0, 'RankTwo': 0, 'MyCustomRank': 6, ...}`.
