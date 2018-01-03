@@ -7,7 +7,12 @@ const invites = (msg, numberUses, numberLeft, nextRole, hasInviteLink) => {
     msg.channel.send({
       embed: richEmbed
               .setColor('#ffffff')
-              .setDescription(`You have ${numberUses} invites, only ${numberLeft} more invites until ${nextRole}`)
+              .setDescription(`**Stats for ${msg.author}**
+
+:ballot_box_with_check: Users Invited: ${numberUses}
+:trophy: Current Rank: ${msg.member.highestRole}
+:chart_with_upwards_trend: Invites left: ${numberLeft}
+:level_slider: Next Rank: ${nextRole}`)
     });
   } else {
     msg.channel.send({

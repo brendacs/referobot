@@ -1,15 +1,14 @@
 import Discord from 'discord.js';
-import roles from './roles.js';
+import customRoles from '../roles.json';
 import invitesCmd from './commands/invites.js';
 import updateme from './commands/updateme.js';
 
-const invitesCalc = (bot, msg, cmd, thisUser, thisMember) => {
+const invitesCalc = (bot, msg, cmd) => {
   const richEmbed = new Discord.RichEmbed();
-  let user = thisUser ? thisUser : msg.author.id;
+  let user = msg.author.id;
   let numberUses;
   let max = 0;
-  let invites = msg !== null ? msg.guild.fetchInvites() : thisMember.guild.fetchInvites();
-  invites
+  let invites = msg.guild.fetchInvites()
     .then(result => {
       let inviteArr = result.array();
       for (let i = 0; i < inviteArr.length; i++) {
@@ -22,22 +21,34 @@ const invitesCalc = (bot, msg, cmd, thisUser, thisMember) => {
           }
         }
       }
+      numberUses = max;
 
-    numberUses = max;
-    let nextRole;
-    let roleNumber;
-    if (numberUses < 4) [nextRole, roleNumber] = ["Recruit", 4];
-    else if (numberUses < 12) [nextRole, roleNumber] = ["Corporal", 12];
-    else if (numberUses < 36) [nextRole, roleNumber] = ["Sergeant", 36];
-    else if (numberUses < 75) [nextRole, roleNumber] = ["Lieutenant", 75];
-    else if (numberUses < 125) [nextRole, roleNumber] = ["Captain", 125];
-    else if (numberUses < 175) [nextRole, roleNumber] = ["General", 175];
-    else if (numberUses >= 175) [nextRole, roleNumber] = ["XXX", 0];
-    let numberLeft = roleNumber - numberUses;
-    let hasInviteLink = true;
-    if (isNaN(numberLeft)) hasInviteLink = false;
+      let roleNames = Object.keys(customRoles);
+      let roleNums = Object.values(customRoles);
 
-    if (cmd === 'invites') invitesCmd(msg, numberUses, numberLeft, nextRole, hasInviteLink);
+      let nextRole;
+      let roleNumber;
+      if (numberUses < roleNums[0]) [nextRole, roleNumber] = [roleNames[0], roleNums[0]];
+      else if (numberUses < roleNums[1]) [nextRole, roleNumber] = [roleNames[1], roleNums[1]];
+      else if (numberUses < roleNum[2]) [nextRole, roleNumber] = [roleNames[2], roleNums[2]];
+      else if (numberUses < roleNum[3]) [nextRole, roleNumber] = [roleNames[3], roleNums[3]];
+      else if (numberUses < roleNum[4]) [nextRole, roleNumber] = [roleNames[4], roleNums[4]];
+      else if (numberUses < roleNums[5]) [nextRole, roleNumber] = [roleNames[5], roleNums[5]];
+      else if (numberUses >= roleNums[5]) {
+        msg.channel.send({
+          embed: richEmbed
+                  .setColor('#ffffff')
+                  .setDescription(`You are the highest role of ${msg.member.highestRole} with ${numberUses} invites.`)
+        })
+      }
+      let numberLeft = roleNumber - numberUses;
+      let hasInviteLink = true;
+      if (isNaN(numberLeft)) hasInviteLink = false;
+
+      if (cmd === 'invites') {
+        invitesCmd(msg, numberUses, numberLeft, nextRole, hasInviteLink);
+        updateme(msg, numberUses, numberLeft, nextRole, hasInviteLink);
+      }
   });
 }
 

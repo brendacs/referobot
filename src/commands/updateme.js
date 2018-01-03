@@ -1,8 +1,9 @@
 import Discord from 'discord.js';
+import customRoles from '../../roles.json';
 
-const updateme = (msg, numberUses, numberLeft, nextRole, hasInviteLink, thisMember) => {
+const updateme = (msg, numberUses, numberLeft, nextRole, hasInviteLink) => {
   const richEmbed = new Discord.RichEmbed();
-  let member = thisMember ? thisMember : msg.member;
+  let member = msg.member;
 
   if (member == null) {
     msg.guild.fetchMember(msg.author, true);
@@ -10,7 +11,7 @@ const updateme = (msg, numberUses, numberLeft, nextRole, hasInviteLink, thisMemb
   }
 
   if (hasInviteLink) {
-    let allGuildRoles = msg !== null ? msg.guild.roles.array() : thisMember.guild.roles.array();
+    let allGuildRoles = msg.guild.roles.array();
     let roles = member.roles.array();
     let updatedRole;
     let currentRoles = {};
@@ -21,21 +22,17 @@ const updateme = (msg, numberUses, numberLeft, nextRole, hasInviteLink, thisMemb
       currentRoles[roles[i].name] = i;
     }
 
-    if (numberUses >= 4) {
-      updatedRole = "Recruit";
-    } if (numberUses >= 12) {
-      updatedRole = "Corporal";
-    } if (numberUses >= 36) {
-      updatedRole = "Sergeant";
-    } if (numberUses >= 75) {
-      updatedRole = "Lieutenant";
-    } if (numberUses >= 125) {
-      updatedRole = "Captain";
-    } if (numberUses >= 175) {
-      updatedRole = "General";
-    }
+    let roleNames = Object.keys(customRoles);
+    let roleNums = Object.values(customRoles);
 
-    if ((updatedRole in currentRoles || numberUses < 4)) {
+    if (numberUses >= roleNums[0]) updatedRole = `${roleNames[0]}`;
+    if (numberUses >= roleNums[1]) updatedRole = `${roleNames[1]}`;
+    if (numberUses >= roleNums[2]) updatedRole = `${roleNames[2]}`;
+    if (numberUses >= roleNums[3]) updatedRole = `${roleNames[3]}`;
+    if (numberUses >= roleNums[4]) updatedRole = `${roleNames[4]}`;
+    if (numberUses >= roleNums[5]) updatedRole = `${roleNames[5]}`;
+
+    if (updatedRole in currentRoles || numberUses < roleNums[0]) {
       updated = true;
     } else {
       for(let i = 0; i < allGuildRoles.length; i++) {
@@ -45,14 +42,7 @@ const updateme = (msg, numberUses, numberLeft, nextRole, hasInviteLink, thisMemb
         }
       }
     }
-    if (msg !== null) {
-      msg.channel.send({
-        embed: richEmbed
-                .setColor('#ffffff')
-                .setDescription(`Your roles have been updated.`)
-      });
-    }
-  } else if (msg !== null) {
+  } else {
     msg.channel.send({
       embed: richEmbed
               .setColor('#ffffff')

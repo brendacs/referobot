@@ -4,7 +4,6 @@ import request from 'superagent';
 import auth from '../auth.json';
 import msgParser from './msgParser.js';
 import express from 'express';
-import autoUpdate from './autoUpdate.js';
 
 const app = express();
 
@@ -34,10 +33,6 @@ bot.on('ready', (evt) => {
   logger.info(bot.user.username + ' - ' + bot.user.id);
 
   bot.user.setPresence({status: 'online', game: {name: `>help | ${bot.guilds.size} servers`, type: 0}});
-});
-
-bot.on('guildMemberAdd', (member) => {
-  autoUpdate(bot, member);
 });
 
 msgParser(bot);
