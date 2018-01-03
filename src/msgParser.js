@@ -11,7 +11,7 @@ const msgParser = (bot) => {
       const cmd = args[0];
       const subcmd = args[1];
       commands(bot, msg, cmd, subcmd);
-    } else if (msg.mentions.users.has('398201213872766988')) { // if bot is mentioned
+    } else if (msg.mentions.users.has(bot.id)) { // if bot is mentioned
       const args = msg.toString().split(' ');
       const cmd = args[1];
       const subcmd = args[2];
