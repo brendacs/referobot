@@ -40,6 +40,7 @@ const invitesCalc = (bot, msg, cmd) => {
                   .setColor('#ffffff')
                   .setDescription(`You are the highest role of ${msg.member.highestRole} with ${numberUses} invites.`)
         })
+        return; // no calculation needed
       }
       let numberLeft = roleNumber - numberUses;
       let hasInviteLink = true;
