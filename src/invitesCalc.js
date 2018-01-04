@@ -46,9 +46,16 @@ const invitesCalc = (bot, msg, cmd) => {
       let hasInviteLink = true;
       if (isNaN(numberLeft)) hasInviteLink = false;
 
-      if (cmd === 'invites') {
-        invitesCmd(msg, numberUses, numberLeft, nextRole, hasInviteLink);
-        updateme(msg, numberUses, numberLeft, nextRole, hasInviteLink);
+      if (hasInviteLink) {
+        invitesCmd(msg, numberUses, numberLeft, nextRole);
+        updateme(msg, numberUses, numberLeft, nextRole);
+      } else {
+        msg.channel.send({
+          embed: richEmbed
+                  .setColor('#ffffff')
+                  .setDescription(`You must create an invite link.`)
+        });
+        return;
       }
   });
 }
