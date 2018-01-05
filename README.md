@@ -1,6 +1,6 @@
 # Referobot
 
-A referral bot, great for investment pump Discord servers and other referral-based servers. Currently, the only way to use it is to self-host, but I may consider hosting the bot at a later time. See installation and usage for self-hosting directions.
+A referral bot, great for referral-based Discord servers. Currently, the only way to use it is to self-host, but I may consider hosting the bot at a later time. See installation and usage for self-hosting directions.
 
 ## Commands
 
