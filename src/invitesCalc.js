@@ -6,16 +6,21 @@ import updateme from './commands/updateme.js';
 const invitesCalc = (bot, msg, cmd) => {
   const richEmbed = new Discord.RichEmbed();
   let user = msg.author.id;
-  let numberUses = 0;
+  let max = 0;
   let invites = msg.guild.fetchInvites()
     .then(result => {
       let inviteArr = result.array();
       for (let i = 0; i < inviteArr.length; i++) {
         let invite = inviteArr[i];
         if (invite.inviter.id === user) {
-          numberUses += invite.uses;
+          numberUses = invite.uses;
+
+          if (numberUses > max) {
+            max = numberUses;
+          }
         }
       }
+      numberUses = max;
 
       let roleNames = Object.keys(customRoles);
       let roleNums = Object.values(customRoles);
