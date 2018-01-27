@@ -7,6 +7,7 @@ const invitesCalc = (bot, msg, cmd) => {
   const richEmbed = new Discord.RichEmbed();
   let user = msg.author.id;
   let max = 0;
+  let numberUses;
   let invites = msg.guild.fetchInvites()
     .then(result => {
       let inviteArr = result.array();
