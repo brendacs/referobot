@@ -8,7 +8,7 @@ import set from './set.js';
 
 const commands = (bot, msg, cmd, subcmd) => {
   const richEmbed = new Discord.RichEmbed();
-  let currChannel = msg.channel.name;
+  let currChannel = "<#" + msg.channel.id + ">";
   if (channelPerm !== undefined && currChannel !== `${channelPerm}`) {
     msg.channel.send({
       embed: richEmbed
